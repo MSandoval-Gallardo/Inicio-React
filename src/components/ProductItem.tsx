@@ -10,7 +10,7 @@ const ProductItem = ({title, description, id}: Props) => {
     // console.log(props)
   return (
     <div>
-        <li>{description} - {title}</li>
+        <li>{id} {description} - {title}</li>
     </div>
   )
 }

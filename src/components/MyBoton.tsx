@@ -25,7 +25,7 @@ function MyButton(){
   return(
     <button 
     className="btn"
-    onClick = {() => handelClick("mensaje desde el boton")} //se debe crear una funcion anonima para que no se ejecute al actualizar 
+    onClick = {() => handelClick("mensaje desde el boton")} //se debe crear una funcion anonima "() => para que no se ejecute al actualizar 
     >
       Mi Boton
     </button>
