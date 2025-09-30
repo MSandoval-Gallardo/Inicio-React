@@ -1,17 +1,24 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
+import Modal from "./components/Modal";
 
 const App = () => {
 
-  const [count, setCount] = useState(0)
+  const [isOpen, setIsOpen] = useState(true)
 
-  useEffect(() => {
-    console.log("el componente esta montado");
-    document.title = `Count: ${count}`;
-  }, [count]);
   return (
-    <div>
+    <div className="container mx-auto">
       <h1>useEffect</h1>
-      <button onClick={() => setCount(count + 1)}>Incremento: {count}</button>
+      <button 
+      onClick={() => {
+        setIsOpen(!isOpen)}}
+      className="btn btn-primary">
+        {
+          isOpen ? "Cerrar" : "Abrir"
+
+        }</button>
+      {
+        isOpen && <Modal/>
+      }
     </div>
   )
 }
