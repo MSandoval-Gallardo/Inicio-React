@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useFetch } from "./components/hooks/useFetch";
+
 
 interface Todo {
   userId: number;
@@ -32,30 +33,7 @@ interface Todo {
 
 const App = () => {
 
-  const [todo, setTodo] = useState<Todo | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<null | string>(null)
-
-  useEffect(() => {
-    const fetchData = async () => {
-    try {
-      const res = await fetch("https://jsonplaceholder.typicode.com/todos/4")
-      if(!res.ok) throw new Error("404 en la API");
-      const data = (await res.json()) as Todo
-      setTodo(data)
-      } catch (e: unknown) {
-        if(e instanceof Error){
-        return setError(e.message)
-        }
-        console.log(e);
-        setError("error mas grave...")
-      } finally{
-        setIsLoading(false)
-      }
-      
-    }
-    fetchData()
-  }, [])
+  const {data: todo, isLoading, error} = useFetch<Todo>("https://jsonplaceholder.typicode.com/todos/4")
 
   if(isLoading) return <p>Loading...</p>
   if(error) return <p>{error}</p>
@@ -66,7 +44,7 @@ const App = () => {
       <h2>Titulo {todo?.title}</h2>
       <h3>Estado {todo?.completed ? "Tarea completada" : "Tarea no completada"}</h3>
       
-      opcion para iterar en desarrollo
+      {/* opcion para iterar en desarrollo */}
       {/* lo que queremos iterar // para formatear // identacion  (sin el null y el 2, queda todo en una linea)*/}
       <pre>{JSON.stringify(todo, null, 2)}</pre> 
     </div>
